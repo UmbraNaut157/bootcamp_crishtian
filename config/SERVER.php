@@ -12,5 +12,5 @@
 
 	/*----------  Datos de la encriptacion (No modificar) ----------*/
 	const METHOD="AES-256-CBC"; // no cambiar
-	const SECRET_KEY='BC2025'; // se puede cambiar hasta cierto punto
+	const SECRET_KEY='BCC-2004'; // se puede cambiar hasta cierto punto
 	const SECRET_IV='102791'; // no cambiar
