@@ -8,17 +8,17 @@
     class userTypeController extends userTypeModel{
         public function add_user_type_controller(){
             
-
+            //Recibiendo datos del formulario
             $Descripcion = mainModel::clean_string($_POST['descripcion_reg']);
             $estatus = mainModel::clean_string($_POST['estatus_reg']);
 
             /*== comprobar campos vacios ==*/
             if($Descripcion == "" || $estatus == ""){
                 $alerta = [
-                    "Alerta" => "simple",
+                    "Alerta" => "Simple",
                     "Titulo" => "Ocurrió un error inesperado",
                     "Texto" => "No has llenado todos los campos que son obligatorios",
-                    "Tipo" => "error"
+                    "Tipo" => "Error"
                 ];
                 echo json_encode($alerta);
                 exit();
@@ -135,6 +135,7 @@
         }
         
         public function update_user_type_controller(){
+            //Recibir los datos del formulario
             $id = mainModel::decryption($_POST['id_up']);
             $id = mainModel::clean_string($id);
             $Descripcion = mainModel::clean_string($_POST['descripcion_up']);
