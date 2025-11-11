@@ -20,8 +20,8 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputStatus">ESTATUS *</label>
-                    <select id="inputStatus" class="form-control" name="estatus_reg">
-                        <option  value="1" selected>ACTIVO</option >
+                    <select id="inputStatus" class="form-control" name="estatus-reg">
+                        <option  value="1" selected>ACTIVO</option>
                         <option value="0" >INACTIVO</option>
                     </select>
                 </div>

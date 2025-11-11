@@ -6,173 +6,182 @@
     }
 
     class userController extends userModel{
-        // public function add_user_controller(){
-        //     $nombre = mainModel::clean_string($_POST['nombre-reg']);
-        //     $usuario = mainModel::clean_string($_POST['usuario-reg']);
-        //     $password = mainModel::clean_string($_POST['password1-reg']);
-        //     $password2 = mainModel::clean_string($_POST['password2-reg']);
-        //     $email = mainModel::clean_string($_POST['email-reg']);
-        //     $telefono = mainModel::clean_string($_POST['telefono-reg']);
-        //     $tipo = mainModel::clean_string($_POST['tipo-reg']);
-        //     $estatus = mainModel::clean_string($_POST['estatus-reg']);
+        public function add_user_controller(){
+            $alert = [
+                    "Alerta" => "simple",
+                    "Titulo" => "",
+                    "Texto" => "",
+                    "Tipo" => "success"
+                ];
+                echo json_encode($alert);
+                exit();    
+            // Recibiendo los datos del formulario
+            $nombre = mainModel::clean_string($_POST['nombre-reg']);
+            $usuario = mainModel::clean_string($_POST['usuario-reg']);
+            $password = mainModel::clean_string($_POST['password1-reg']);
+            $password2 = mainModel::clean_string($_POST['password2-reg']);
+            $email = mainModel::clean_string($_POST['email-reg']);
+            $telefono = mainModel::clean_string($_POST['telefono-reg']);
+            $tipo = mainModel::clean_string($_POST['tipo-reg']);
+            $estatus = mainModel::clean_string($_POST['estatus-reg']);
 
-        //     /*== comprobar campos vacios ==*/
-        //     if($nombre == "" || $usuario == "" || $password == "" || $password2 == "" || $email == "" || $tipo == "" || $estatus == ""){
-        //         $alert = [
-        //             "Alerta" => "simple",
-        //             "Titulo" => "Ocurrió un error inesperado",
-        //             "Texto" => "No has llenado todos los campos que son obligatorios",
-        //             "Tipo" => "error"
-        //         ];
-        //         echo json_encode($alert);
-        //         exit();     
-        //     }
+            /*== comprobar campos vacios ==*/
+            if($nombre == "" || $usuario == "" || $password == "" || $password2 == "" || $email == "" || $tipo == "" || $estatus == ""){
+                $alert = [
+                    "Alerta" => "simple",
+                    "Titulo" => "Ocurrió un error inesperado",
+                    "Texto" => "No has llenado todos los campos que son obligatorios",
+                    "Tipo" => "error"
+                ];
+                echo json_encode($alert);
+                exit();     
+            }
 
-        //     /*== Verificando integridad de los datos ==*/
+            /*== Verificando integridad de los datos ==*/
             
 
-        //     if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,35}",$nombre)){
-		// 		$alerta=[
-		// 			"Alerta"=>"simple",
-		// 			"Titulo"=>"Ocurrió un error inesperado",
-		// 			"Texto"=>"El NOMBRE no coincide con el formato solicitado: [a-zA-ZáéíóúÁÉÍÓÚñÑ ]{5,35}",
-		// 			"Tipo"=>"error"
-		// 		];
-		// 		echo json_encode($alerta);
-		// 		exit();
-		// 	}
+            if(mainModel::verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{5,35}",$nombre)){
+				$alerta=[
+					"Alerta"=>"simple",
+					"Titulo"=>"Ocurrió un error inesperado",
+					"Texto"=>"El NOMBRE no coincide con el formato solicitado: [a-zA-ZáéíóúÁÉÍÓÚñÑ ]{5,35}",
+					"Tipo"=>"error"
+				];
+				echo json_encode($alerta);
+				exit();
+			}
 
-        //     if(mainModel::verificar_datos("[a-zA-Z0-9]{5,20}",$usuario)){
-        //         $alerta=[
-        //             "Alerta"=>"simple",
-        //             "Titulo"=>"Ocurrió un error inesperado",
-        //             "Texto"=>"El USUARIO no coincide con el formato solicitado: [a-zA-Z0-9]{5,20}",
-        //             "Tipo"=>"error"
-        //         ];
-        //         echo json_encode($alerta);
-        //         exit();
-        //     }
+            if(mainModel::verificar_datos("[a-zA-Z0-9]{5,20}",$usuario)){
+                $alerta=[
+                    "Alerta"=>"simple",
+                    "Titulo"=>"Ocurrió un error inesperado",
+                    "Texto"=>"El USUARIO no coincide con el formato solicitado: [a-zA-Z0-9]{5,20}",
+                    "Tipo"=>"error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
 
-        //     if($password != "" && $password2 != ""){
-        //         if($password != $password2){
-        //             $alert = [
-        //                 "Alerta" => "simple",
-        //                 "Titulo" => "Ocurrió un error inesperado",
-        //                 "Texto" => "Las contraseñas que acabas de ingresar no coinciden",
-        //                 "Tipo" => "error"
-        //             ];
-        //             echo json_encode($alert);
-        //             exit();
-        //         }else{
-        //             $password = mainModel::encryption($password);
-        //         }
-        //     }  
+            if($password != "" && $password2 != ""){
+                if($password != $password2){
+                    $alert = [
+                        "Alerta" => "simple",
+                        "Titulo" => "Ocurrió un error inesperado",
+                        "Texto" => "Las contraseñas que acabas de ingresar no coinciden",
+                        "Tipo" => "error"
+                    ];
+                    echo json_encode($alert);
+                    exit();
+                }else{
+                    $password = mainModel::encryption($password);
+                }
+            }  
             
-        //     /*== Verificando integridad de los datos ==*/
-        //     if(mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$password)){
-        //         $alerta=[
-        //             "Alerta"=>"simple",
-        //             "Titulo"=>"Ocurrió un error inesperado",
-        //             "Texto"=>"La CONTRASEÑA no coincide con el formato solicitado: [a-zA-Z0-9$@.-]{7,100}",
-        //             "Tipo"=>"error"
-        //         ];
-        //         echo json_encode($alerta);
-        //         exit();
-        //     }
+            /*== Verificando integridad de los datos ==*/
+            if(mainModel::verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$password)){
+                $alerta=[
+                    "Alerta"=>"simple",
+                    "Titulo"=>"Ocurrió un error inesperado",
+                    "Texto"=>"La CONTRASEÑA no coincide con el formato solicitado: [a-zA-Z0-9$@.-]{7,100}",
+                    "Tipo"=>"error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
 
-        //     /*== Comprobando email ==*/
-		// 	if($email!=""){
-		// 		if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-		// 			$check_email=mainModel::ejecutar_consulta_simple("SELECT usuario_email FROM usuario WHERE usuario_email='$email'");
-		// 			if($check_email->rowCount()>0){
-		// 				$alerta=[
-		// 					"Alerta"=>"simple",
-		// 					"Titulo"=>"Ocurrió un error inesperado",
-		// 					"Texto"=>"El EMAIL ingresado ya se encuentra registrado en el sistema",
-		// 					"Tipo"=>"error"
-		// 				];
-		// 				echo json_encode($alerta);
-		// 				exit();
-		// 			}
-		// 		}else{
-		// 			$alerta=[
-		// 				"Alerta"=>"simple",
-		// 				"Titulo"=>"Ocurrió un error inesperado",
-		// 				"Texto"=>"Ha ingresado un correo no valido",
-		// 				"Tipo"=>"error"
-		// 			];
-		// 			echo json_encode($alerta);
-		// 			exit();
-		// 		}
-		// 	}
+            /*== Comprobando email ==*/
+			if($email!=""){
+				if(filter_var($email,FILTER_VALIDATE_EMAIL)){
+					$check_email=mainModel::ejecutar_consulta_simple("SELECT usuario_email FROM usuario WHERE usuario_email='$email'");
+					if($check_email->rowCount()>0){
+						$alerta=[
+							"Alerta"=>"simple",
+							"Titulo"=>"Ocurrió un error inesperado",
+							"Texto"=>"El EMAIL ingresado ya se encuentra registrado en el sistema",
+							"Tipo"=>"error"
+						];
+						echo json_encode($alerta);
+						exit();
+					}
+				}else{
+					$alerta=[
+						"Alerta"=>"simple",
+						"Titulo"=>"Ocurrió un error inesperado",
+						"Texto"=>"Ha ingresado un correo no valido",
+						"Tipo"=>"error"
+					];
+					echo json_encode($alerta);
+					exit();
+				}
+			}
 
-        //     /*== Comprobando telefono ==*/
-        //     if($telefono!=""){
-        //         if(mainModel::verificar_datos("[0-9()+]{8,20}",$telefono)){
-        //             $alerta=[
-        //                 "Alerta"=>"simple",
-        //                 "Titulo"=>"Ocurrió un error inesperado",
-        //                 "Texto"=>"El TELEFONO no coincide con el formato solicitado: [0-9()+]{8,20}",
-        //                 "Tipo"=>"error"
-        //             ];
-        //             echo json_encode($alerta);
-        //             exit();
-        //         }
-        //     }
+            /*== Comprobando telefono ==*/
+            if($telefono!=""){
+                if(mainModel::verificar_datos("[0-9()+]{8,20}",$telefono)){
+                    $alerta=[
+                        "Alerta"=>"simple",
+                        "Titulo"=>"Ocurrió un error inesperado",
+                        "Texto"=>"El TELEFONO no coincide con el formato solicitado: [0-9()+]{8,20}",
+                        "Tipo"=>"error"
+                    ];
+                    echo json_encode($alerta);
+                    exit();
+                }
+            }
             
-        //     /*== Comprobando tipo de usuario ==*/
-        //     if($tipo != "Administrador" && $tipo != "Editor" && $tipo != "Supervisor"){
-        //         $alerta=[
-        //             "Alerta"=>"simple",
-        //             "Titulo"=>"Ocurrió un error inesperado",
-        //             "Texto"=>"El TIPO DE USUARIO seleccionado no es valido",
-        //             "Tipo"=>"error"
-        //         ];
-        //         echo json_encode($alerta);
-        //         exit();
-        //     }
+            /*== Comprobando tipo de usuario ==*/
+             if($tipo != "1" /* && $tipo != "Editor" && $tipo != "Supervisor" && $tipo != "Cliente" */){
+                $alerta=[
+                    "Alerta"=>"simple",
+                    "Titulo"=>"Ocurrió un error inesperado",
+                    "Texto"=>"El TIPO DE USUARIO seleccionado no es valido",
+                    "Tipo"=>"error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
 
-        //     /*== Comprobando estatus ==*/
-        //     if($estatus != "1" && $estatus != "0"){
-        //         $alerta=[
-        //             "Alerta"=>"simple",
-        //             "Titulo"=>"Ocurrió un error inesperado",
-        //             "Texto"=>"El ESTATUS seleccionado no es valido",
-        //             "Tipo"=>"error"
-        //         ];
-        //         echo json_encode($alerta);
-        //         exit();
-        //     }
+            /*== Comprobando estatus ==*/
+            if($estatus != "1" && $estatus != "0"){
+                $alerta=[
+                    "Alerta"=>"simple",
+                    "Titulo"=>"Ocurrió un error inesperado",
+                    "Texto"=>"El ESTATUS seleccionado no es valido",
+                    "Tipo"=>"error"
+                ];
+                echo json_encode($alerta);
+                exit();
+            }
 
-        //     $data_user_reg = [
-        //         "Nombre" => $nombre,
-        //         "Usuario" => $usuario,
-        //         "Password" => $password,
-        //         "Email" => $email,
-        //         "Telefono" => $telefono,
-        //         "Tipo" => $tipo,
-        //         "Estatus" => $estatus
-        //     ];
+            $data_user_reg = [
+                "Nombre" => $nombre,
+                "Usuario" => $usuario,
+                "Password" => $password,
+                "Email" => $email,
+                "Telefono" => $telefono,
+                "Tipo" => $tipo,
+                "Estatus" => $estatus
+            ];
 
-        //     $add_user = userModel::add_user_model($data_user_reg);
+            $add_user = userModel::add_user_model($data_user_reg);
 
-        //     if($add_user->rowCount() == 1){
-        //         $alerta=[
-        //             "Alerta"=>"limpiar",
-        //             "Titulo"=>"Usuario registrado",
-        //             "Texto"=>"El usuario se registro con exito en el sistema",
-        //             "Tipo"=>"success"
-        //         ];
-        //     }else{
-        //         $alerta=[
-        //             "Alerta"=>"simple",
-        //             "Titulo"=>"Ocurrió un error inesperado",
-        //             "Texto"=>"No hemos podido registrar el usuario",
-        //             "Tipo"=>"error"
-        //         ];
-        //     }
-        //     echo json_encode($alerta);
-        // } /* Fin del controlador */
+            if($add_user->rowCount() == 1){
+                $alerta=[
+                    "Alerta"=>"limpiar",
+                    "Titulo"=>"Usuario registrado",
+                    "Texto"=>"El usuario se registro con exito en el sistema",
+                    "Tipo"=>"success"
+                ];
+            }else{
+                $alerta=[
+                    "Alerta"=>"simple",
+                    "Titulo"=>"Ocurrió un error inesperado",
+                    "Texto"=>"No hemos podido registrar el usuario",
+                    "Tipo"=>"error"
+                ];
+            }
+            echo json_encode($alerta);
+        } /* Fin del controlador */
 
         // public function update_user_controller(){
         //     // Recibiendo el id
